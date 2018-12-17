@@ -5,12 +5,14 @@
 
 void merge(int arr[], int l, int r,int m){
 	/* print array before sorting*/
+	/*
 	printf("Before sorting:");
 	for(int i = l; i < r; i++){
 		printf("%d ", arr[i]);
 	}
 	printf("\n");
-
+	*/
+	
 	/* move array to Left and Right subarray */
 	int n1 = m - l;
 	int n2 = r - m;
@@ -37,18 +39,20 @@ void merge(int arr[], int l, int r,int m){
 	}
 	
 	/* print array after sorting*/
+	/*
 	printf("After sorting:");
 	for(int i = l; i < r; i++){
 		printf("%d ", arr[i]);
 	}
 	printf("\n");
+	*/
 	return;
 }
 
 void merge_sort(int arr[], int l, int r){ // by recursive (top down)
 	if(r == l+1) return;
 	int m = (l+r)/2;
-	printf("l = %d, m = %d, r = %d\n", l, m, r);
+	//printf("l = %d, m = %d, r = %d\n", l, m, r);
 	merge_sort(arr, l, m);
 	merge_sort(arr, m, r);
 
@@ -73,7 +77,7 @@ void merge_sort2(int arr[], int l, int r){	// by iterative (bottom up)
 int main(){
 	int a[8] = {1, 3, 5, 6, 2, 4, 7, 8};
 	merge(a, 0, 8, 4);
-	merge_sort(a, 0, 8);
+	//merge_sort(a, 0, 8);
 	
 	int b[100];
 	for(int i = 0; i < 100; i++){
@@ -81,4 +85,7 @@ int main(){
 	}
 	
 	merge_sort2(b, 0, 100);
+	for(int i = 0; i < 100; i++){
+		printf((i == 99)?"%d\n":"%d ", b[i]);
+	}
 }
