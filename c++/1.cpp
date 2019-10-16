@@ -12,7 +12,7 @@ int main(){
 		x2 = x3;
 		x3 = tmp;
 		tmp = y2;
-		x2 = y3;
+		y2 = y3;
 		y3 = tmp;
 	}
 	if(x1 != x2){
