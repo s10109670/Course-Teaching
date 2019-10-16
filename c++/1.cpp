@@ -40,7 +40,7 @@ int main(){
 			dy = -dy;
                 if(dx == 0 || dy ==0)
                         cout << 0 << endl;
-		if(dx == dy){
+		else if(dx == dy){
 			cout << 1 << endl;
 		}
 		else
