@@ -38,6 +38,8 @@ int main(){
 		int dy = y1 - y2;
 		if(dy < 0)
 			dy = -dy;
+                if(dx == 0 || dy ==0)
+                        cout << 0 << endl;
 		if(dx == dy){
 			cout << 1 << endl;
 		}
