@@ -2,7 +2,7 @@
 #include <algorithm>
 
 using namespace std;
-#define MAXM 500
+#define MAXM 501
 #define MAXN 501
 
 class Edge{
@@ -16,7 +16,7 @@ bool cmp(Edge a, Edge b){
 	if(a.wei == b.wei){
 		if(a.u + a.v == b.u + b.v)
 			return a.u < b.u;
-		return a.u+a.v < b.u +b.v;
+		return a.u+a.v < b.u+b.v;
 	}
 	return (a.wei < b.wei);
 }
@@ -45,18 +45,19 @@ int main(){
 		int tmpu = edges[i].u, tmpv = edges[i].v;
 		//cout << tmpu << tmpv << endl;
 		int headu = head[tmpu], headv = head[tmpv];
-		if(head[tmpu] != head[tmpv] && degree[tmpu] <= t && degree[tmpv] <= t){
+		if(headu != headv && degree[tmpu] < t && degree[tmpv] < t){
 			//connect
 			answer[cnt].u = tmpu;
 			answer[cnt].v = tmpv;
 			weight += edges[i].wei;
 			cnt++;
+			degree[tmpu]++;
+			degree[tmpv]++;
 			for(int j = 1; j <= n; j++){
 				if(head[j] == headv)
 					head[j] = headu;
 			}
 		}
-	
 	}
 	cout << weight << '\n';
 	for(int i = 0; i < cnt; i++){
