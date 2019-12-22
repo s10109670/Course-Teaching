@@ -37,6 +37,7 @@ private:
 			}
 		}
 		//find maxdigit
+		digit = 1;
 		for(int i = MAXD-1; i >= 0; i--){
 			if(num[i] > 0){
 				digit = i+1;
@@ -66,18 +67,20 @@ public:
 		delete[] num;
 	}
 	void print(){
-		char* s = new char[MAXD+1];
-		if (digit == 0){
-			digit++;
-		}
-		for(int i = 0; i < digit; i++){
-			s[i] = (num[digit-i-1]+'0');
-		}
-		s[digit] = '\0';
 		if(sign == -1)
 			cout << '-';
-		cout << s << '\n';
-		delete s;
+		if(digit == 0){
+			digit++;
+		}
+		else{
+			for(int i = digit - 1; i >= 0; i--){
+				if(i%3 == 0 && i != 0)
+					cout << num[i] << ',';
+				else
+					cout << num[i];
+			}
+		}
+		cout << '\n';
 		return;
 	}
 	void abs(){
@@ -110,7 +113,7 @@ int find_index(BigInt* var_array[], int cnt, char* name);
 
 int main(){
 	int var_cnt = 0;
-	BigInt* var_arr[16];
+	BigInt* var_arr[50];
 	char str[256];
 	while(cin.getline(str, 256)){
 		if(strncmp("BigInt ", str, 7) == 0){ //construct: BigInt name(value)
@@ -122,6 +125,8 @@ int main(){
 		else{		//method: name.function(value);
 			char* name = strtok(str, ".");
 			int i = find_index(var_arr, var_cnt, name);
+			if(i < 0)
+				continue;
 			char* function = strtok(NULL, "(");
 			char* value = strtok(NULL, ")");
 			if(strcmp("print", function) == 0){
@@ -129,10 +134,14 @@ int main(){
 			}
 			else if(strcmp("add", function) == 0){
 				int j = find_index(var_arr, var_cnt, value);
+				if(j < 0)
+					continue;
 				var_arr[i]->add(*(var_arr[j]));
 			}
 			else if(strcmp("subtract", function) == 0){
 				int j = find_index(var_arr, var_cnt, value);
+				if(j < 0)
+					continue;
 				var_arr[i]->subtract(*(var_arr[j]));
 			}
 			else if(strcmp("negate", function) == 0){
