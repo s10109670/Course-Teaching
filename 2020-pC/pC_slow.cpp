@@ -9,6 +9,7 @@ int main(){
 	int c[MAXN+2] = {0};
 	int h[MAXN+2] = {0};
 	int last[MAXN+2] = {0};
+	int next[MAXN+2] = {0};
 	for(int i = 1; i <= N; i++){
 		cin >> c[i];
 	}
@@ -16,21 +17,26 @@ int main(){
 	for(int i = 1; i <= N; i++){
 		cin >> h[i];
 	}
-	for(int i = 1; i <= N; i++){
+	for(int i = 0; i <= N+1; i++){
 		last[i] = i-1;
+		next[i] = i+1;
 	}
 	/* Processing */
 	int cnt = 0, maxh = 0;
-	for(int i = 1; i <= N; i++){
-		int p = i, next = i+1; //next[i] is always i+1
-		while(p != 0 && (c[p] + h[p] <= c[next] || c[p]-h[p] >= c[last[p]])){
-			if(maxh < h[p])
-				maxh = h[p];
-			cnt++;
-			//chop tree[p]
-			last[next] = last[p];
-			//chop back
-			p = last[p];
+	int converge = false;
+	while (!converge){
+		converge = true;
+		for(int i = next[0]; i <= N; i = next[i]){
+			if(c[i] + h[i] <= c[next[i]] || c[i]-h[i] >= c[last[i]]){
+				if(maxh < h[i])
+					maxh = h[i];
+				cnt++;
+				//chop tree[i]
+				last[next[i]] = last[i];
+				next[last[i]] = next[i];
+				converge = false;
+				//cout << c[i]<< endl;
+			}
 		}
 	}
 	/* Output */

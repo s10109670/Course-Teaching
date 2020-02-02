@@ -12,6 +12,7 @@ int main(){
 	for(int i = 1; i <= N; i++){
 		cin >> c[i];
 	}
+	c[N+1] = L;
 	for(int i = 1; i <= N; i++){
 		cin >> h[i];
 	}

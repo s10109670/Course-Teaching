@@ -9,7 +9,7 @@ int main(){
 	}
 	cout << endl;
 	for(int i = 0; i < 100000; i++){
-		cout << i << ' ';
+		cout << i+5 << ' ';
 	}
 	cout << endl;
 }
